@@ -385,17 +385,6 @@ uv run python scripts/build_index.py --corpus-dir data/corpus/quantum
 - By review label (good, needs_revision, bad)
 - By time range
 
-## 🎓 Tutorial Talking Points
-
-When using this for a demo/tutorial:
-
-1. **Architecture Overview**: Show the agent graph and explain non-deterministic routing
-2. **Corpus Building**: Walk through scraping and indexing process
-3. **Live Demo**: Ask questions and show real-time traces in Phoenix
-4. **RAG Quality**: Compare RAG vs non-RAG responses
-5. **Debugging**: Show how to identify issues using traces (e.g., wrong retrieval, hallucinations)
-6. **Metrics**: Discuss potential eval metrics based on reviewer output
-
 ## 🔒 Security & Ethics
 
 - **Robots.txt Compliance**: Scraper respects Wikipedia's robots.txt
