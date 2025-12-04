@@ -1,0 +1,371 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+}
+
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: 1rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.health-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: white;
+  text-transform: capitalize;
+}
+
+.health-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4ade80;
+}
+
+.health-indicator.degraded .health-dot {
+  background-color: #fbbf24;
+}
+
+.health-indicator.unhealthy .health-dot,
+.health-indicator.error .health-dot {
+  background-color: #ef4444;
+}
+
+.phoenix-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.phoenix-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #252525;
+  border-bottom: 1px solid #333;
+}
+
+.routing-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.routing-controls label {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.routing-select {
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.routing-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.new-conversation-btn {
+  padding: 0.5rem 1rem;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.new-conversation-btn:hover {
+  background-color: #5568d3;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem 1.5rem;
+  background-color: #1a1a1a;
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #aaa;
+}
+
+.welcome-message h2 {
+  color: #e0e0e0;
+  margin-bottom: 1rem;
+}
+
+.example-questions {
+  margin-top: 2rem;
+  text-align: left;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #252525;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.example-questions ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.example-questions li {
+  padding: 0.5rem 0;
+  color: #667eea;
+  cursor: pointer;
+}
+
+.message {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 85%;
+}
+
+.message.user {
+  background-color: #2d3748;
+  margin-left: auto;
+  border-left: 3px solid #667eea;
+}
+
+.message.assistant {
+  background-color: #252525;
+  margin-right: auto;
+  border-left: 3px solid #764ba2;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.message-header strong {
+  color: #667eea;
+}
+
+.message.assistant .message-header strong {
+  color: #764ba2;
+}
+
+.message-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge.rag-yes {
+  background-color: #065f46;
+  color: #6ee7b7;
+}
+
+.badge.rag-no {
+  background-color: #7c2d12;
+  color: #fed7aa;
+}
+
+.badge.review-good {
+  background-color: #065f46;
+  color: #6ee7b7;
+}
+
+.badge.review-needs_revision {
+  background-color: #854d0e;
+  color: #fcd34d;
+}
+
+.badge.review-bad {
+  background-color: #7f1d1d;
+  color: #fca5a5;
+}
+
+.badge.trace-id {
+  background-color: #1e3a8a;
+  color: #93c5fd;
+  font-family: monospace;
+}
+
+.message-content {
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+.message-content p {
+  margin: 0.5rem 0;
+}
+
+.message-content h3 {
+  margin-top: 1rem;
+  color: #667eea;
+}
+
+.message-content ul {
+  margin-left: 1.5rem;
+}
+
+.message-content a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.message-content a:hover {
+  text-decoration: underline;
+}
+
+.message-content code {
+  background-color: #333;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #aaa;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  background-color: #667eea;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+.input-container {
+  padding: 1.5rem;
+  background-color: #252525;
+  border-top: 1px solid #333;
+  display: flex;
+  gap: 1rem;
+}
+
+.message-input {
+  flex: 1;
+  padding: 1rem;
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: none;
+}
+
+.message-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.message-input::placeholder {
+  color: #666;
+}
+
+.send-button {
+  padding: 1rem 2rem;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.send-button:hover:not(:disabled) {
+  background-color: #5568d3;
+}
+
+.send-button:disabled {
+  background-color: #444;
+  cursor: not-allowed;
+  color: #666;
+}
