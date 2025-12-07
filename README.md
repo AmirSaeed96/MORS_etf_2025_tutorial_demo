@@ -83,16 +83,27 @@ Keep this terminal running.
 
 ### 6. Scrape Wikipedia Corpus
 
-This is a one-time setup to build your quantum physics corpus:
+This is a one-time setup to build your quantum physics corpus.
+
+**RECOMMENDED: Use the API scraper** (faster and more reliable):
 
 ```bash
-# Run the scraper (will take ~10-15 minutes for 200 pages with 2s delay)
-uv run python scripts/scrape_wikipedia.py --max-pages 200 --out data/corpus/quantum
+# Run the API scraper (will take ~5-8 minutes for 200 pages)
+uv run python scripts/scrape_wikipedia_api.py --max-pages 200 --out data/corpus/quantum
 
 # You should see progress logs as pages are scraped
 ```
 
-**Note**: The scraper respects Wikipedia's robots.txt and implements polite rate limiting (2 seconds between requests by default).
+**Alternative: HTML scraper** (legacy method, may have robots.txt issues):
+
+```bash
+# Only use if API scraper doesn't work
+uv run python scripts/scrape_wikipedia.py --max-pages 200 --out data/corpus/quantum
+```
+
+**Note**: The API scraper uses Wikipedia's official MediaWiki API, which is the recommended approach. Both scrapers implement polite rate limiting.
+
+For detailed scraper documentation and troubleshooting, see [scripts/README.md](scripts/README.md).
 
 ### 7. Build ChromaDB Index
 

@@ -34,7 +34,7 @@ class WikipediaScraper:
 
     def __init__(
         self,
-        user_agent: str = "QuantumPhoenixBot/1.0 (Educational Demo)",
+        user_agent: str = "Mozilla/5.0 (compatible; QuantumPhoenixBot/1.0; +https://github.com/yourusername/quantum-phoenix; Educational Research)",
         delay_seconds: float = 2.0,
         timeout: int = 30,
         max_pages: int = 200
@@ -288,7 +288,9 @@ class WikipediaScraper:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Scrape Wikipedia quantum physics articles')
+    parser = argparse.ArgumentParser(
+        description='Scrape Wikipedia quantum physics articles via HTML parsing (DEPRECATED: Use scrape_wikipedia_api.py instead)'
+    )
     parser.add_argument(
         '--max-pages',
         type=int,
@@ -305,16 +307,33 @@ def main():
         '--delay',
         type=float,
         default=2.0,
-        help='Delay between requests in seconds'
+        help='Delay between requests in seconds (minimum 2.0 recommended)'
+    )
+    parser.add_argument(
+        '--user-agent',
+        type=str,
+        default=None,
+        help='Custom user agent string (should include contact info and be Mozilla-compatible)'
     )
 
     args = parser.parse_args()
 
-    # Initialize scraper
-    scraper = WikipediaScraper(
-        delay_seconds=args.delay,
-        max_pages=args.max_pages
-    )
+    # Warn user about deprecated method
+    logger.warning("=" * 70)
+    logger.warning("NOTE: HTML scraping is NOT the recommended method!")
+    logger.warning("Please use scrape_wikipedia_api.py instead - it's faster,")
+    logger.warning("more reliable, and officially supported by Wikipedia.")
+    logger.warning("=" * 70)
+
+    # Initialize scraper with optional custom user agent
+    kwargs = {
+        'delay_seconds': max(args.delay, 2.0),  # Enforce minimum 2 seconds for HTML
+        'max_pages': args.max_pages
+    }
+    if args.user_agent:
+        kwargs['user_agent'] = args.user_agent
+
+    scraper = WikipediaScraper(**kwargs)
 
     # Load robots.txt
     scraper.load_robots_txt()
