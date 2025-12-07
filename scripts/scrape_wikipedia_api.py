@@ -30,7 +30,7 @@ class WikipediaAPIScraper:
 
     def __init__(
         self,
-        user_agent: str = "QuantumPhoenixBot/1.0 (Educational Demo; Python/requests)",
+        user_agent: str = "QuantumPhoenixBot/1.0 (Educational Research Project; Contact: your.email@example.com)",
         delay_seconds: float = 1.0,
         timeout: int = 30,
         max_pages: int = 200
@@ -134,7 +134,10 @@ class WikipediaAPIScraper:
             for link in page_data.get('links', []):
                 link_title = link.get('title', '')
                 # Only include links that might be quantum-related
-                if any(kw in link_title.lower() for kw in ['quantum', 'physics', 'mechanics']):
+                link_lower = link_title.lower()
+                quantum_keywords = ['quantum', 'physics', 'mechanics', 'particle', 'wave',
+                                   'photon', 'electron', 'atom', 'spin', 'entangle']
+                if any(kw in link_lower for kw in quantum_keywords):
                     links.append(f"https://en.wikipedia.org/wiki/{link_title.replace(' ', '_')}")
 
             result = {
@@ -224,7 +227,7 @@ class WikipediaAPIScraper:
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Scrape Wikipedia quantum physics articles using the MediaWiki API'
+        description='Scrape Wikipedia quantum physics articles using the MediaWiki API (RECOMMENDED METHOD)'
     )
     parser.add_argument(
         '--max-pages',
@@ -242,16 +245,26 @@ def main():
         '--delay',
         type=float,
         default=1.0,
-        help='Delay between requests in seconds'
+        help='Delay between requests in seconds (minimum 1.0 for politeness)'
+    )
+    parser.add_argument(
+        '--user-agent',
+        type=str,
+        default=None,
+        help='Custom user agent string (should include contact info)'
     )
 
     args = parser.parse_args()
 
-    # Initialize scraper
-    scraper = WikipediaAPIScraper(
-        delay_seconds=args.delay,
-        max_pages=args.max_pages
-    )
+    # Initialize scraper with optional custom user agent
+    kwargs = {
+        'delay_seconds': max(args.delay, 1.0),  # Enforce minimum 1 second
+        'max_pages': args.max_pages
+    }
+    if args.user_agent:
+        kwargs['user_agent'] = args.user_agent
+
+    scraper = WikipediaAPIScraper(**kwargs)
 
     # Crawl using API
     scraper.crawl(QUANTUM_SEED_URLS)
